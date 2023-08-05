@@ -1,4 +1,4 @@
-﻿Data Scientist Role Play: Profiling and Analyzing the Yelp Dataset Worksheet
+Data Scientist Role Play: Profiling and Analyzing the Yelp Dataset Worksheet
 
 
 Part 1: Yelp Dataset Profiling and Understanding
@@ -40,31 +40,50 @@ Part 1: Yelp Dataset Profiling and Understanding
 	Answer: No
 	
 	
-	SQL code used to arrive at answer:
-		select id, name, review_count, yelping_since, useful, funny, cool, fans, average_stars, 
-			   compliment_hot, compliment_more, compliment_profile, compliment_cute, compliment_list, 
-			   compliment_note, compliment_plain, compliment_cool, compliment_funny, compliment_writer, compliment_photos
-		from  user
-		where 	id is null
-				or name is null
-				or review_count is null
-				or yelping_since is null
-				or useful is null
-				or funny is null
-				or cool is null
-				or fans is null
-				or average_stars is null
-				or compliment_hot is null
-				or compliment_more is null
-				or compliment_profile is null
-				or compliment_cute is null
-				or compliment_list is null
-				or compliment_note is null
-				or compliment_plain is null
-				or compliment_cool is null
-				or compliment_funny is null
-				or compliment_writer is null
-				or compliment_photos is null
+SQL code used to arrive at answer:
+	
+	SELECT 
+		id
+		,name
+		,review_count
+		,yelping_since
+		,useful
+		,funny
+		,cool
+		,fans
+		,average_stars
+		,compliment_hot
+		,compliment_more
+		,compliment_profile
+		,compliment_cute
+		,compliment_list
+		,compliment_note
+		,compliment_plain
+		,compliment_cool
+		,compliment_funny
+		,compliment_writer
+		,compliment_photos
+	FROM  user
+	WHERE 	id is null
+		or name is null
+		or review_count is null
+		or yelping_since is null
+		or useful is null
+		or funny is null
+		or cool is null
+		or fans is null
+		or average_stars is null
+		or compliment_hot is null
+		or compliment_more is null
+		or compliment_profile is null
+		or compliment_cute is null
+		or compliment_list is null
+		or compliment_note is null
+		or compliment_plain is null
+		or compliment_cool is null
+		or compliment_funny is null
+		or compliment_writer is null
+		or compliment_photos is null
 	
 
 	
@@ -89,13 +108,16 @@ Part 1: Yelp Dataset Profiling and Understanding
 
 5. List the cities with the most reviews in descending order:
 
-	SQL code used to arrive at answer:
-		select city, sum(review_count)
-		from business
-		group by city
-		order by sum(review_count) desc
+SQL code used to arrive at answer:
 	
-	Copy and Paste the Result Below:
+	SELECT 
+		city
+		,SUM(review_count)
+	FROM business
+	GROUP BY city
+	ORDER BY sum(review_count) desc
+	
+		Result:
 		+-----------------+-------------------+
 		| city            | sum(review_count) |
 		+-----------------+-------------------+
@@ -131,13 +153,16 @@ Part 1: Yelp Dataset Profiling and Understanding
 
 	i. Avon
 	
-		SQL code used to arrive at answer:
-			select stars as [Star Rating], count(stars) as [Count]
-			from business b
-			where city = 'Avon'
-			group by stars
+SQL code used to arrive at answer:
+	
+	SELECT 
+		stars as [Star Rating]
+		,count(stars) as [Count]
+	FROM business b
+	WHERE city = 'Avon'
+	GROUP BY stars
 		
-		Copy and Paste the Resulting Table Below (2 columns - star rating and count):
+			Result:
 			+-------------+-------+
 			| Star Rating | Count |
 			+-------------+-------+
@@ -152,13 +177,16 @@ Part 1: Yelp Dataset Profiling and Understanding
 	
 	ii. Beachwood
 
-		SQL code used to arrive at answer:
-			select stars as [Star Rating], count(stars) as [Count]
-			from business b
-			where city = 'Beachwood'
-			group by stars
+SQL code used to arrive at answer:
+			
+	SELECT 
+		stars as [Star Rating]
+		,count(stars) as [Count]
+	FROM business b
+	WHERE city = 'Beachwood'
+	GROUP BY stars
 		
-		Copy and Paste the Resulting Table Below (2 columns - star rating and count):
+			Result:
 			+-------------+-------+
 			| Star Rating | Count |
 			+-------------+-------+
@@ -174,13 +202,16 @@ Part 1: Yelp Dataset Profiling and Understanding
 
 7. Find the top 3 users based on their total number of reviews:
 		
-	SQL code used to arrive at answer:
-		select name, review_count
-		from user
-		order by review_count desc
-		limit 3
+SQL code used to arrive at answer:
 		
-	Copy and Paste the Result Below:
+	SELECT 
+		name
+		,review_count
+	FROM user
+	ORDER BY review_count desc
+	LIMIT 3
+		
+		Result:
 		+--------+--------------+
 		| name   | review_count |
 		+--------+--------------+
@@ -193,16 +224,20 @@ Part 1: Yelp Dataset Profiling and Understanding
 8. Does posing more reviews correlate with more fans?
 		- No
 		
-	Please explain your findings and interpretation of the results:
+Please explain your findings and interpretation of the results:
 		- N/A
 		
-		SQL code:
-			select name, review_count, fans
-			from user
-			order by fans desc
-			limit 10
+SQL code:
+	
+	SELECT 
+		name
+		,review_count
+		,fans
+	FROM user
+	ORDER BY fans desc
+	LIMIT 10
 		
-		Results:
+			Result:
 			+-----------+--------------+------+
 			| name      | review_count | fans |
 			+-----------+--------------+------+
@@ -224,17 +259,18 @@ Part 1: Yelp Dataset Profiling and Understanding
 	Answer: more reviews with the word "love"
 
 	
-	SQL code used to arrive at answer:
-		select (select count(text)
-				from review
-				where text like "%love%") as  love_text, 
-
-			   (select count(text) 
-				from review
-				where text like "%hate%") as hate_text
+SQL code used to arrive at answer:
+		
+	SELECT 
+		(SELECT COUNT(text)
+		FROM review
+		WHERE text LIKE "%love%") AS  love_text
+		,(SELECT COUNT(text) 
+		FROM review
+		WHERE text LIKE "%hate%") AS hate_text
 		
 		
-		Results:
+		Result:
 		+-----------+-----------+
 		| love_text | hate_text |
 		+-----------+-----------+
@@ -242,15 +278,15 @@ Part 1: Yelp Dataset Profiling and Understanding
 		+-----------+-----------+
 	
 	
-		OR:
+OR:
 		
-		SELECT 'love' Word, COUNT(text) [Total Count]
-		FROM review
-		WHERE text LIKE '%love%'
-		UNION
-		SELECT 'hate' Word, COUNT(text) [Total Count]
-		FROM review
-		WHERE text LIKE '%hate%'
+	SELECT 'love' Word, COUNT(text) [Total Count]
+	FROM review
+	WHERE text LIKE '%love%'
+	UNION
+	SELECT 'hate' Word, COUNT(text) [Total Count]
+	FROM review
+	WHERE text LIKE '%hate%'
 		
 		+------+-------------+
 		| Word | Total Count |
@@ -262,13 +298,16 @@ Part 1: Yelp Dataset Profiling and Understanding
 	
 10. Find the top 10 users with the most fans:
 
-	SQL code used to arrive at answer:
-		select name, fans
-		from user
-		order by fans desc
-		limit 10
+SQL code used to arrive at answer:
+		
+	SELECT 
+		name
+		,fans
+	FROM user
+	ORDER BY fans desc
+	LIMIT 10
 	
-	Copy and Paste the Result Below:
+		Result:
 		+-----------+------+
 		| name      | fans |
 		+-----------+------+
@@ -290,15 +329,20 @@ Part 2: Inferences and Analysis
 
 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.
 	Category='Beauty & Spas' City='Las Vegas'
+
 i. Do the two groups you chose to analyze have a different distribution of hours?
+
 Group 1: The majority of the business are open for around 12 hours 
+
 +-------+-----------+-------------+----------------------+
 | stars | city      | hours       | number_of_businesses |
 +-------+-----------+-------------+----------------------+
 |   2.5 | Las Vegas | |8:00-22:00 |                    7 |
 |   3.0 | Las Vegas | |11:00-0:00 |                    7 |
 +-------+-----------+-------------+----------------------+
+
 Group 2: majority of the business are open for around 8 hours or less during business hours.
+
 +-------+-----------+-------------+----------------------+
 | stars | city      | hours       | number_of_businesses |
 +-------+-----------+-------------+----------------------+
@@ -318,8 +362,10 @@ Group 2: majority of the business are open for around 8 hours or less during bus
 +-------+-----------+-------------+----------------------+
 
 ii. Do the two groups you chose to analyze have a different number of reviews?
+
 Yes, the businesses in Las Vegas with stars between 4.0 and 5.0 have more reviews than those with 2.0 - 3.0 stars.        
-Group 1 
+
+Group 1: 
 +-------+-----------+-----------+
 | stars | city      | n_reviews |
 +-------+-----------+-----------+
@@ -327,6 +373,7 @@ Group 1
 |   2.5 | Las Vegas |      4846 |
 |   3.0 | Las Vegas |      8564 |
 +-------+-----------+-----------+
+
 Group 2: 
 +-------+-----------+-----------+
 | stars | city      | n_reviews |
@@ -359,53 +406,61 @@ From the table below, we observe that in the Downtown area there are more busine
 
 
 SQL code used for analysis:
- i.   Group 1 
-    SELECT
-        b.stars,
-        b.city,
-        substr(h.hours,-11) hours, -- remove the day from hours column
-        count(b.id) number_of_businesses
-    FROM business as b
-            INNER JOIN hours h ON b.id=h.business_id -- join to fetch data from hours and business table
+
+i.   Group 1 
+    
+	SELECT
+        	b.stars
+        	,b.city
+        	,substr(h.hours,-11) hours -- remove the day from hours column
+        	,count(b.id) number_of_businesses
+	FROM business AS b
+        INNER JOIN hours h ON b.id=h.business_id -- join to fetch data from hours and business table
         GROUP BY b.stars,b.city,substr(h.hours,-11)
-    HAVING city='Las Vegas' AND b.stars BETWEEN 2.0 AND 3.0
+	HAVING city='Las Vegas' AND b.stars BETWEEN 2.0 AND 3.0
         ORDER BY b.stars;
         
     Group 2
-    SELECT
-        b.stars,
-        b.city,
-        substr(h.hours,-11) hours, -- remove the day from hours column
-        count(b.id) number_of_businesses
-    FROM business as b
-            INNER JOIN hours h ON b.id=h.business_id
+    
+	SELECT
+        	b.stars
+        	,b.city
+        	,substr(h.hours,-11) hours -- remove the day from hours column
+        	,count(b.id) number_of_businesses
+    	FROM business AS b
+        INNER JOIN hours h ON b.id=h.business_id
         GROUP BY b.stars,b.city,substr(h.hours,-11)
-    HAVING city='Las Vegas' AND b.stars BETWEEN 4.0 AND 5.0
+    	HAVING city='Las Vegas' AND b.stars BETWEEN 4.0 AND 5.0
         ORDER BY b.stars;
-  ii. 
-  Group 1
-  SELECT stars,
-    city,
-    sum(review_count) as n_reviews
-    FROM business
-    GROUP BY stars,city
-    HAVING city='Las Vegas' AND stars BETWEEN 2.0 AND 3.0  
 
-    Group 2: 
-   SELECT stars,
-    city,
-    sum(review_count) as n_reviews
-    FROM business
-    GROUP BY stars,city
-    HAVING city='Las Vegas' AND stars BETWEEN 4.0 AND 5.0     
+ii. 
+Group 1:
+  	SELECT 
+		stars
+    		,city
+    		,sum(review_count) AS n_reviews
+    	FROM business
+    	GROUP BY stars,city
+    	HAVING city='Las Vegas' AND stars BETWEEN 2.0 AND 3.0  
+
+Group 2: 
+   	SELECT 
+		stars
+    		,city
+    		,SUM(review_count) AS n_reviews
+    	FROM business
+    	GROUP BY stars,city
+    	HAVING city='Las Vegas' AND stars BETWEEN 4.0 AND 5.0     
+
 iii.
-    SELECT stars,
-    city,
-    neighborhood,
-    sum(id)as n_businesses
-    FROM business
-    GROUP BY stars,neighborhood
-    HAVING city='Las Vegas' AND neighborhood='Downtown'
+    	SELECT 
+		stars
+    		,city
+    		,neighborhood
+    		SUM(id) AS n_businesses
+    	FROM business
+    	GROUP BY stars,neighborhood
+    	HAVING city='Las Vegas' AND neighborhood='Downtown'
 
 
 2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? List at least two differences and the SQL code you used to arrive at your answer.
@@ -430,21 +485,25 @@ There majority of the businesses that are open have between 4.0 and 5.0 stars (4
          
 SQL code used for analysis:
 Difference 1: 
-  -- count open businesses
-  SELECT count(is_open)
-  from business
-  Where is_open=1
- -- count closed businesses
-   SELECT count(is_open)
-  from business
-  Where is_open=0
+
+  	-- count open businesses
+  	SELECT COUNT(is_open)
+  	FROM business
+  	Where is_open=1
+	 -- count closed businesses
+   	SELECT COUNT(is_open)
+  	FROM business
+  	WHERE is_open=0
+
 Difference 2
-SELECT is_open,
-  stars,
-  count(id) as n_businesses
-  from business
-  group by is_open,stars
-  HAVING is_open=1 and stars between 2.0 and 5.0 -- if is_open=1, then the business is actually open.
+
+	SELECT 
+		is_open
+  		,stars
+  		,COUNT(id) AS n_businesses
+  	FROM business
+  	GROUP BY is_open,stars
+  	HAVING is_open=1 ANS stars between 2.0 ANS 5.0 -- if is_open=1, then the business is actually open.
   
 3. For this last part of your analysis, you are going to choose the type of analysis you want to conduct on the Yelp dataset and are going to prepare the data for analysis.
 
@@ -455,6 +514,7 @@ i. Indicate the type of analysis you chose to do:
          
 ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:
       I joined data from the business table with the categories table to see if the a business category has a impact on stars (or viceversa) in the city of Mesa . I also pulled review_count and is_open as this factor may affect the analysis       
+
 iii. Output of your finished dataset:
 +------+-----------------------------+-------+--------------+---------+
 | city | category                    | stars | review_count | is_open |
@@ -486,13 +546,17 @@ iii. Output of your finished dataset:
          
 iv. Provide the SQL code you used to create your final dataset:
 
-SELECT b.city,c.category, b.stars, b.review_count, b.is_open 
-FROM business b 
-LEFT JOIN category c
-ON b.id = c.business_id
-WHERE b.city='Mesa'
-GROUP BY c.category
-ORDER BY b.stars DESC
+	SELECT 
+		b.city
+		,c.category
+		,b.stars
+		,b.review_count
+		,b.is_open 
+	FROM business b 
+	LEFT JOIN category c ON b.id = c.business_id
+	WHERE b.city='Mesa'
+	GROUP BY c.category
+	ORDER BY b.stars DESC
 
 
 	
