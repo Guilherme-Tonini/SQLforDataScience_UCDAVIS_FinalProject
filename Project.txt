@@ -413,7 +413,7 @@ i.   Group 1
         	b.stars
         	,b.city
         	,substr(h.hours,-11) hours -- remove the day from hours column
-        	,count(b.id) number_of_businesses
+        	,COUNT(b.id) number_of_businesses
 	FROM business AS b
         INNER JOIN hours h ON b.id=h.business_id -- join to fetch data from hours and business table
         GROUP BY b.stars,b.city,substr(h.hours,-11)
@@ -426,7 +426,7 @@ i.   Group 1
         	b.stars
         	,b.city
         	,substr(h.hours,-11) hours -- remove the day from hours column
-        	,count(b.id) number_of_businesses
+        	,COUNT(b.id) number_of_businesses
     	FROM business AS b
         INNER JOIN hours h ON b.id=h.business_id
         GROUP BY b.stars,b.city,substr(h.hours,-11)
@@ -438,7 +438,7 @@ Group 1:
   	SELECT 
 		stars
     		,city
-    		,sum(review_count) AS n_reviews
+    		,SUM(review_count) AS n_reviews
     	FROM business
     	GROUP BY stars,city
     	HAVING city='Las Vegas' AND stars BETWEEN 2.0 AND 3.0  
@@ -457,7 +457,7 @@ iii.
 		stars
     		,city
     		,neighborhood
-    		SUM(id) AS n_businesses
+    		,SUM(id) AS n_businesses
     	FROM business
     	GROUP BY stars,neighborhood
     	HAVING city='Las Vegas' AND neighborhood='Downtown'
