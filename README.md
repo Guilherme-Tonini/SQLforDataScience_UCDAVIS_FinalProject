@@ -16,7 +16,7 @@ The second part of the assignment involves coming up with your own inferences an
 ## Dataset Information
 The dataset used in this project is sourced from Yelp, a platform for reviews and ratings. An image of the dataset structure can be seen below:
 
-![hOlYbrgyEeeTsRKxhJ5OZg_517578844a2fd129650492eda3186cd1_YelpERDiagram](https://github.com/Guilherme-Tonini/SQLforDataScience_UCDAVIS_FinalProject/assets/123425319/feb2f84f-3af7-4069-955e-36780eb6c856)
+![hOlYbrgyEeeTsRKxhJ5OZg_517578844a2fd129650492eda3186cd1_YelpERDiagram](https://github.com/Guilherme-Tonini/SQLforDataScience_UCDAVIS_FinalProject/assets/123425319/8c0fc509-19ad-42f0-ae50-82746c9b0482)
 
 ## License
 This project is for educational and learning purposes only, following the guidelines of the UC Davis course. Refer to the course terms for more information.
